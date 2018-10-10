@@ -1,0 +1,16 @@
+{% extends "mysite3/index.html" %}
+{% block content %}
+{% for a1 in Airport.object.values() %}
+<option value="1">{{ a1['City'] }}</option>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
