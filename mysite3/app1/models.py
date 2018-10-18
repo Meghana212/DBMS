@@ -237,4 +237,8 @@ class Route(models.Model):
     class Meta:
         managed = False
         db_table = 'route'
-
+class form(models.Model):
+    frm = models.CharField(db_column='From', max_length=15, blank=True, null=True)
+    to = models.CharField(db_column='to', max_length=15, blank=True, null=True)
+    depart = models.DateTimeField()
+    arrival = models.DateTimeField()

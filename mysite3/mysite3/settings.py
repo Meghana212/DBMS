@@ -73,11 +73,17 @@ WSGI_APPLICATION = 'mysite3.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+# 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#'read_default_file': './../../ConfigFiles/my.cnf',
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'meghana',
+        'PASSWORD': 'milkshake',
+        'NAME': 'Airlines',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
@@ -119,3 +125,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
