@@ -1,0 +1,230 @@
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="codepixer">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Jet Airlines</title>
+		
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			{% load staticfiles %}
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}" type="text/css"/>
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css"/>
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css"/>
+			<link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css"/>					
+			<link rel="stylesheet" href="{% static 'css/animate.min.css' %}" type="text/css"/>
+			<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css"/>			
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" type="text/css"/>
+			<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css"/>
+		</head>
+		<body>
+
+			  <header id="header" id="home">
+			    <div class="container">
+			    	<div class="row align-items-center justify-content-between d-flex">
+				      <div id="logo">
+				        <a href="index.html">Jet Airlines</a>
+				      </div>
+				      <nav id="nav-menu-container">
+				        <ul class="nav-menu">
+				          <li class="menu-active"><a href="index.html">Home</a></li>
+				         		          
+				        </ul>
+				      </nav><!-- #nav-menu-container -->		    		
+			    	</div>
+			    </div>
+			  </header><!-- #header -->
+
+
+			<!-- start banner Area -->
+			
+
+			<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>	
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-center justify-content-center">
+						<div class="banner-content col-lg-7 col-md-6 ">
+							<h6 class="text-white ">the Royal Essence of Journey</h6>
+							<h1 class="text-white text-uppercase">
+								Come fly with us!				
+							</h1>
+							<p class="pt-20 pb-20 text-white">
+								For a relaxed journey.
+							</p>
+				
+						</div>
+						<div class="col-lg-5  col-md-6 header-right">
+							<h3 class="text-white pb-30">Book Your Flight Today!</h3>
+							<form class="form" role="form" autocomplete="off" method ="post">
+							    
+							    {% csrf_token %}
+							        <div class="form-control txt-field">
+								       	<div class="default-select" id="default-select">
+											<select>
+
+												<option value="" disabled selected hidden>From</option>
+												{% for f in form %}
+												<option id ="from_id" value="{{ f.frm.city }}">{{ f.frm.city }}</option>
+												{% endfor %}
+												
+											</select>
+										</div>
+							        </div>
+							       
+							        <div class="form-control txt-field">
+								       	<div class="default-select" id="default-select">
+											<select>
+												<option value="" disabled selected hidden>To</option>
+												{% for f in form.to.city %}
+												<option id="to_id"value="{{ f }}">{{ f }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+								
+									<div class="form-control txt-field">
+										<div class="input-group dates-wrap">                                          
+											<input id="DEPART" class="dates form-control" id="exampleAmount" placeholder="Depart" type="text">                        
+											<div class="input-group-prepend">
+												<span  class="input-group-text"><span class="lnr lnr-calendar-full">{{ form.depart }}</span></span>
+											</div>											
+										</div>
+							        </div>
+							        <div class="form-control txt-fieldt">
+										<div class="input-group dates-wrap">                                              
+											<input id="ARRIVAL" class="dates form-control" id="exampleAmount" placeholder="Return" type="text">                        
+											<div class="input-group-prepend">
+												<span  class="input-group-text"><span class="lnr lnr-calendar-full">{{ form.arrival }}</span></span>
+											</div>											
+										</div>
+									</div>
+									<br>
+									<div class="form-control txt-field">
+											<div class="input-group-prepend">
+													{{ form.NOP }}
+										 </div>
+									 </div>
+							    <br>						    
+							    
+							    <div class="form-group row">
+							        <div class="col-md-12">
+							            <a href="details/"  class="btn btn-default btn-lg btn-block text-center text-uppercase" type="reset">Search Flight</a>
+							        </div>
+							    </div>
+							</form>
+						</div>											
+					</div>
+				</div>					
+			</section>
+			<!-- End banner Area -->	
+
+			<!-- Start feature Area -->
+			<section class="feature-area section-gap" id="service">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="col-md-8 pb-40 header-text">
+							<h1>What Services we offer to our clients</h1>
+							<p>
+								
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-6">
+							<div class="single-feature">
+								<h4><span class="lnr lnr-user"></span>Discounts</h4>
+								<p>
+									Discounts available for senior citizens,students,infants,unaccompanied minors.
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="single-feature">
+								<h4><span class="lnr lnr-license"></span>Professional Service</h4>
+								<p>
+									Well trained crew who will provide you the service that you deserve.
+								</p>								
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="single-feature">
+								<h4><span class="lnr lnr-phone"></span>Offers</h4>
+								<p>
+									Avail discounts by becoming a part of our membership program.
+								</p>								
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="single-feature">
+								<h4><span class="lnr lnr-rocket"></span>Special/disability assistance</h4>
+								<p>
+									Our endeavor is to ensure our customers requiring special assistance have a hassle free journey.
+								</p>				
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="single-feature">
+								<h4><span class="lnr lnr-diamond"></span>In-Flight</h4>
+								<p>
+										Experience privacy, luxury and comfort thousands of feet above the ground. Welcome to a new world in the skies.
+								</p>								
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="single-feature">
+								<h4><span class="lnr lnr-bubble"></span>Lounges</h4>
+								<p>
+									The perfect place to work,relax and unwind.
+								</p>									
+							</div>
+						</div>						
+					</div>
+				</div>	
+			</section>
+			<!-- End feature Area -->		
+
+			
+
+
+			<!-- start footer Area -->		
+			<footer class="footer-area section-gap">
+			</footer>	
+			<!-- End footer Area -->		
+
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}" type="text/javascript"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" type="text/javascript"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js' %}" type="text/javascript"></script>			
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>			
+  			<script src="{% static 'js/easing.min.js' %}" type="text/javascript"></script>			
+			<script src="{% static 'js/hoverIntent.js' %}" type="text/javascript"></script>
+			<script src="{% static 'js/superfish.min.js' %}" type="text/javascript"></script>	
+			<script src="{% static 'js/jquery.ajaxchimp.min.js' %}" type="text/javascript"></script>
+			<script src="{% static 'js/jquery.magnific-popup.min.js' %}" type="text/javascript"></script>	
+			<script src="{% static 'js/owl.carousel.min.js' %}" type="text/javascript"></script>			
+			<script src="{% static 'js/jquery.sticky.js' %}" type="text/javascript"></script>
+			<script src="{% static 'js/jquery.nice-select.min.js' %}" type="text/javascript"></script>	
+			<script src="{% static 'js/waypoints.min.js' %}" type="text/javascript"></script>
+			<script src="{% static 'js/jquery.counterup.min.js' %}" type="text/javascript"></script>					
+			<script src="{% static 'js/parallax.min.js' %}" type="text/javascript"></script>		
+			<script src="{% static 'js/mail-script.js' %}" type="text/javascript"></script>	
+			<script src="{% static 'js/main.js' %}" type="text/javascript"></script>	
+		</body>
+	</html>
+
+
+
