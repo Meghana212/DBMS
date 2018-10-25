@@ -69,12 +69,12 @@
 						</div>
 						<div class="col-lg-5  col-md-6 header-right">
 							<h3 class="text-white pb-30">Book Your Flight Today!</h3>
-							<form class="form" role="form" autocomplete="off">
-							    
-							    
+							<form class="form" method="post" novalidate >
+								{% csrf_token %}
+			
 							        <div class="form-control txt-field">
-								       	<div class="default-select" id="default-select"">
-											<select>
+								       	<div class="default-select" id="default-select">
+											<select name="from" >
 
 												<option value="" disabled selected hidden>From</option>
 												{% for a1 in data %}
@@ -86,8 +86,8 @@
 							        </div>
 							       
 							        <div class="form-control txt-field">
-								       	<div class="default-select" id="default-select"">
-											<select>
+								       	<div class="default-select" id="default-select">
+											<select name = "to" >
 												<option value="" disabled selected hidden>To</option>
 												{% for a1 in data %}
 												<option value="{{ a1.city }}">{{ a1.city }}</option>
@@ -98,31 +98,31 @@
 								
 									<div class="form-control txt-field">
 										<div class="input-group dates-wrap">                                          
-											<input id="datepicker" class="dates form-control" id="exampleAmount" placeholder="Depart" type="text">                        
+											<input name="depart" id="depart_id" class="dates form-control" placeholder="YYYY-MM-DD(Depart)" type="text">                        
 											<div class="input-group-prepend">
-												<span  class="input-group-text"><span class="lnr lnr-calendar-full"></span></span>
+												
 											</div>											
 										</div>
 							        </div>
-							        <div class="form-control txt-fieldt">
+							        <div class="form-control txt-field">
 										<div class="input-group dates-wrap">                                              
-											<input id="datepicker2" class="dates form-control" id="exampleAmount" placeholder="Return" type="text">                        
+											<input name="arrival" id="arrival_id" class="dates form-control" placeholder="YYYY-MM-DD(Arrive)" type="text">                        
 											<div class="input-group-prepend">
-												<span  class="input-group-text"><span class="lnr lnr-calendar-full"></span></span>
+												
 											</div>											
 										</div>
 									</div>
-									<br>
 									<div class="form-control txt-field">
+											<input name="NOP" type="text" placeholder="Number of passengers">
 											<div class="input-group-prepend">
-													<input type="text" placeholder="Number of passengers" name="search2">
+													
 										 </div>
 									 </div>
 							    <br>						    
 							    
 							    <div class="form-group row">
 							        <div class="col-md-12">
-							            <a href="details/" class="btn btn-default btn-lg btn-block text-center text-uppercase" type="reset">Search Flight</a>
+							            <a class="btn btn-default btn-lg btn-block text-center text-uppercase" type="submit">Search Flight</a>
 							        </div>
 							    </div>
 							</form>
@@ -133,6 +133,7 @@
 			<!-- End banner Area -->	
 
 			<!-- Start feature Area -->
+			<br>
 			<section class="feature-area section-gap" id="service">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
