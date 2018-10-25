@@ -27,6 +27,9 @@ class Airport(models.Model):
     class Meta:
         db_table = 'airport'
 
+    def __str__(self):
+        return self.city
+
 
 
 class BookingDetails(models.Model):

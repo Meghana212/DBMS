@@ -4,7 +4,7 @@ from app1.models import Airport
 
 class FormIn(forms.ModelForm):
     class Meta:
-        model = form
+        model = Airport
         fields = "__all__"
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
