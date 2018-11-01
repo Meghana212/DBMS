@@ -13,10 +13,20 @@ class Aircraft(models.Model):
     firstclass_capacity = models.IntegerField(db_column='FirstClass_Capacity', blank=True, null=True)  # Field name made lowercase.
     businessclass_capacity = models.IntegerField(db_column='BusinessClass_Capacity', blank=True, null=True)  # Field name made lowercase.
     economy_capacity = models.IntegerField(db_column='Economy_Capacity', blank=True, null=True)  # Field name made lowercase.
-    a_number = models.CharField(db_column='A_Number', max_length=15, blank=True, null=True)  # Field name made lowercase.
+    a_number = models.CharField(db_column='A_Number', unique=True, max_length=15, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'aircraft'
+
+
+class Airlinemiles(models.Model):
+    p = models.ForeignKey('Passenger', models.DO_NOTHING, db_column='P_ID', primary_key=True)  # Field name made lowercase.
+    miles = models.IntegerField(db_column='Miles', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'airlinemiles'
 
 
 class Airport(models.Model):
@@ -25,16 +35,98 @@ class Airport(models.Model):
     a_name = models.CharField(db_column='A_name', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'airport'
 
-    def __str__(self):
-        return self.city
 
+class App1Choice(models.Model):
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField()
+    question = models.ForeignKey('App1Question', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'app1_choice'
+
+
+class App1Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'app1_question'
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=80)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
 
 
 class BookingDetails(models.Model):
     payerid = models.IntegerField(db_column='PayerID', primary_key=True)  # Field name made lowercase.
-    passenger = models.ForeignKey('Passenger', models.DO_NOTHING, db_column='Passenger_ID',null=True)  # Field name made lowercase.
+    passenger = models.ForeignKey('Passenger', models.DO_NOTHING, db_column='Passenger_ID')  # Field name made lowercase.
     firstname = models.CharField(db_column='FirstName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     middlename = models.CharField(db_column='MiddleName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     lastname = models.CharField(db_column='LastName', max_length=15, blank=True, null=True)  # Field name made lowercase.
@@ -47,6 +139,7 @@ class BookingDetails(models.Model):
     totalcost = models.IntegerField(db_column='TotalCost', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'booking_details'
         unique_together = (('payerid', 'passenger'),)
 
@@ -56,7 +149,22 @@ class Discounts(models.Model):
     discount = models.IntegerField(db_column='Discount', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'discounts'
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
 
 
 class DjangoContentType(models.Model):
@@ -69,14 +177,15 @@ class DjangoContentType(models.Model):
         unique_together = (('app_label', 'model'),)
 
 
-'''    class DjangoMigrations(models.Model):
+class DjangoMigrations(models.Model):
     app = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     applied = models.DateTimeField()
 
     class Meta:
+        managed = False
         db_table = 'django_migrations'
-'''
+
 
 class DjangoSession(models.Model):
     session_key = models.CharField(primary_key=True, max_length=40)
@@ -84,6 +193,7 @@ class DjangoSession(models.Model):
     expire_date = models.DateTimeField()
 
     class Meta:
+        managed = False
         db_table = 'django_session'
 
 
@@ -95,17 +205,19 @@ class Fare(models.Model):
     fare = models.IntegerField(db_column='Fare', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'fare'
 
 
 class FlightSchedule(models.Model):
     fs_id = models.IntegerField(db_column='FS_ID', primary_key=True)  # Field name made lowercase.
-    departure = models.CharField(db_column='Departure', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    arrival = models.CharField(db_column='Arrival', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    departure = models.DateTimeField(db_column='Departure', blank=True, null=True)  # Field name made lowercase.
+    arrival = models.DateTimeField(db_column='Arrival', blank=True, null=True)  # Field name made lowercase.
     aircraft = models.ForeignKey(Aircraft, models.DO_NOTHING, db_column='Aircraft', blank=True, null=True)  # Field name made lowercase.
     r = models.ForeignKey('Route', models.DO_NOTHING, db_column='R_ID', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'flight_schedule'
 
 
@@ -118,22 +230,18 @@ class Passenger(models.Model):
     email = models.CharField(db_column='Email', max_length=15, blank=True, null=True)  # Field name made lowercase.
     phone_no = models.CharField(db_column='Phone_no', max_length=15, blank=True, null=True)  # Field name made lowercase.
     nationality = models.CharField(db_column='Nationality', max_length=15, blank=True, null=True)  # Field name made lowercase.
-    airlinemiles = models.IntegerField(db_column='AirlineMiles', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'passenger'
 
 
 class Route(models.Model):
     r_id = models.IntegerField(db_column='R_ID', primary_key=True)  # Field name made lowercase.
-    source_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Source_Airport', blank=True, null=True, related_name = 'src_airport')  # Field name made lowercase.
-    destination_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Destination_Airport', blank=True, null=True, related_name = 'dest_airport')  # Field name made lowercase.
+    source_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Source_Airport', blank=True, null=True, related_name='src')  # Field name made lowercase.
+    destination_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Destination_Airport', blank=True, null=True,related_name='dest')  # Field name made lowercase.
     intermediate_stops = models.IntegerField(db_column='Intermediate_Stops', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'route'
-class form(models.Model):
-    frm = models.CharField(db_column='From', max_length=15, blank=True, null=True)
-    to = models.CharField(db_column='to', max_length=15, blank=True, null=True)
-    depart = models.DateTimeField()
-    arrival = models.DateTimeField()
