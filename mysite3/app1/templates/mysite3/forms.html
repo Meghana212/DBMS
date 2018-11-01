@@ -117,12 +117,13 @@
           <br>
 
             <div class="col-lg-8 col-md-8">
-                    <form action="#">
+                    <form action="#" method="POST" nonvalidate>
+                        {% csrf_token %}
                         <div class="mt-10">
                             <input type="text" name="first_name" placeholder="First Name *" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
                         </div>
                         <div class="mt-10">
-                            <input type="text" name="last_name" placeholder="Middle name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input">
+                            <input type="text" name="middle_name" placeholder="Middle name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input">
                         </div>
                         <div class="mt-10">
                             <input type="text" name="last_name" placeholder="Last Name *" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input">
@@ -133,7 +134,7 @@
                         <div class="mt-10">
                             
                             <div class="form-select" id="default-select">
-                                <select>
+                                <select name="nat">
                                     <option value="1">Nationality</option>
                                     <option value="1">Bangladesh</option>
                                     <option value="1">India</option>
@@ -141,6 +142,9 @@
                                     <option value="1">Srilanka</option>
                                 </select>
                         </div>
+                        <button align href="./../forms/" type="submit" class="btn btn-secondary">Submit</button>
+                    </form>
+                        
           </div>
         </div>
           

@@ -17,6 +17,12 @@
 		<title>Jet Airlines</title>
 		
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<style type="text/css">
+				.tab { 
+      				display:inline-block; 
+       				margin-left: 40px; 
+					}
+			</style>
 			<!--
 			CSS
 			============================================= -->
@@ -69,16 +75,15 @@
 						</div>
 						<div class="col-lg-5  col-md-6 header-right">
 							<h3 class="text-white pb-30">Book Your Flight Today!</h3>
-							<form class="form" role="form" autocomplete="off" method ="post">
+							<form class="form" role="form" method="post" action="details/">
 							    
 							    {% csrf_token %}
 							        <div class="form-control txt-field">
-								       	<div class="default-select" id="default-select">
-											<select>
-
-												<option value="" disabled selected hidden>From</option>
-												{% for f in form %}
-												<option id ="from_id" value="{{ f.frm.city }}">{{ f.frm.city }}</option>
+								       	<div class="default-select" id="default-select"">
+											<select name="from">
+												<option id="from" value="" disabled selected hidden>From</option>
+												{% for a1 in data %}
+												<option name="from_id" value="{{ a1.city }}">{{ a1.city }}</option>
 												{% endfor %}
 												
 											</select>
@@ -86,11 +91,11 @@
 							        </div>
 							       
 							        <div class="form-control txt-field">
-								       	<div class="default-select" id="default-select">
-											<select>
-												<option value="" disabled selected hidden>To</option>
-												{% for f in form.to.city %}
-												<option id="to_id"value="{{ f }}">{{ f }}</option>
+								       	<div class="default-select" id="default-select"">
+											<select name="to">
+												<option  value="" disabled selected hidden>To</option>
+												{% for a1 in data %}
+												<option value="{{ a1.city }}">{{ a1.city }}</option>
 												{% endfor %}
 											</select>
 										</div>
@@ -98,31 +103,31 @@
 								
 									<div class="form-control txt-field">
 										<div class="input-group dates-wrap">                                          
-											<input id="DEPART" class="dates form-control" id="exampleAmount" placeholder="Depart" type="text">                        
+											<input name="depart" class="dates form-control" id="exampleAmount" placeholder="Depart(YYYY-MM-DD)" type="text">                        
 											<div class="input-group-prepend">
-												<span  class="input-group-text"><span class="lnr lnr-calendar-full">{{ form.depart }}</span></span>
+												<span  class="input-group-text"><span class="lnr lnr-calendar-full"></span></span>
 											</div>											
 										</div>
 							        </div>
-							        <div class="form-control txt-fieldt">
+							    <!--    <div class="form-control txt-fieldt">
 										<div class="input-group dates-wrap">                                              
-											<input id="ARRIVAL" class="dates form-control" id="exampleAmount" placeholder="Return" type="text">                        
+											<input name="arrival" class="dates form-control" id="exampleAmount" placeholder="Return(YYYY-MM-DD)" type="text">                        
 											<div class="input-group-prepend">
-												<span  class="input-group-text"><span class="lnr lnr-calendar-full">{{ form.arrival }}</span></span>
+												<span  class="input-group-text"><span class="lnr lnr-calendar-full"></span></span>
 											</div>											
 										</div>
-									</div>
+									</div> -->
 									<br>
 									<div class="form-control txt-field">
 											<div class="input-group-prepend">
-													{{ form.NOP }}
+													<input type="text" placeholder="Number of passengers" name="NOP">
 										 </div>
 									 </div>
 							    <br>						    
 							    
 							    <div class="form-group row">
 							        <div class="col-md-12">
-							            <a href="details/"  class="btn btn-default btn-lg btn-block text-center text-uppercase" type="reset">Search Flight</a>
+							            <button href="details/" class="btn btn-default btn-lg btn-block text-center text-uppercase" type="submit">Search Flight</a>
 							        </div>
 							    </div>
 							</form>
@@ -225,6 +230,5 @@
 			<script src="{% static 'js/main.js' %}" type="text/javascript"></script>	
 		</body>
 	</html>
-
 
 
