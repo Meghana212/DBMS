@@ -125,15 +125,13 @@ class AuthUserUserPermissions(models.Model):
 
 
 class BookingDetails(models.Model):
-    payerid = models.IntegerField(db_column='PayerID', primary_key=True)  # Field name made lowercase.
-    passenger = models.ForeignKey('Passenger', models.DO_NOTHING, db_column='Passenger_ID')  # Field name made lowercase.
+    payerid = models.AutoField(db_column='PayerID', primary_key=True)  # Field name made lowercase.
     firstname = models.CharField(db_column='FirstName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     middlename = models.CharField(db_column='MiddleName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     lastname = models.CharField(db_column='LastName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     flight = models.ForeignKey('FlightSchedule', models.DO_NOTHING, db_column='Flight', blank=True, null=True)  # Field name made lowercase.
     bookingdate = models.DateField(db_column='BookingDate', blank=True, null=True)  # Field name made lowercase.
     phone_no = models.CharField(db_column='Phone_no', max_length=15, blank=True, null=True)  # Field name made lowercase.
-    category = models.ForeignKey('Discounts', models.DO_NOTHING, db_column='Category', blank=True, null=True)  # Field name made lowercase.
     fareid = models.ForeignKey('Fare', models.DO_NOTHING, db_column='FareID', blank=True, null=True)  # Field name made lowercase.
     num_of_seats = models.IntegerField(db_column='Num_of_Seats', blank=True, null=True)  # Field name made lowercase.
     totalcost = models.IntegerField(db_column='TotalCost', blank=True, null=True)  # Field name made lowercase.
@@ -141,7 +139,6 @@ class BookingDetails(models.Model):
     class Meta:
         managed = False
         db_table = 'booking_details'
-        unique_together = (('payerid', 'passenger'),)
 
 
 class Discounts(models.Model):
@@ -215,6 +212,9 @@ class FlightSchedule(models.Model):
     arrival = models.DateTimeField(db_column='Arrival', blank=True, null=True)  # Field name made lowercase.
     aircraft = models.ForeignKey(Aircraft, models.DO_NOTHING, db_column='Aircraft', blank=True, null=True)  # Field name made lowercase.
     r = models.ForeignKey('Route', models.DO_NOTHING, db_column='R_ID', blank=True, null=True)  # Field name made lowercase.
+    firstclass_rcapacity = models.IntegerField(db_column='FirstClass_RCapacity', blank=True, null=True)  # Field name made lowercase.
+    businessclass_rcapacity = models.IntegerField(db_column='BusinessClass_RCapacity', blank=True, null=True)  # Field name made lowercase.
+    economy_rcapacity = models.IntegerField(db_column='Economy_RCapacity', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -222,7 +222,7 @@ class FlightSchedule(models.Model):
 
 
 class Passenger(models.Model):
-    p_id = models.IntegerField(db_column='P_ID', primary_key=True)  # Field name made lowercase.
+    p_id = models.AutoField(db_column='P_ID', primary_key=True)  # Field name made lowercase.
     firstname = models.CharField(db_column='FirstName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     middlename = models.CharField(db_column='MiddleName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     lastname = models.CharField(db_column='LastName', max_length=15, blank=True, null=True)  # Field name made lowercase.
@@ -230,6 +230,8 @@ class Passenger(models.Model):
     email = models.CharField(db_column='Email', max_length=15, blank=True, null=True)  # Field name made lowercase.
     phone_no = models.CharField(db_column='Phone_no', max_length=15, blank=True, null=True)  # Field name made lowercase.
     nationality = models.CharField(db_column='Nationality', max_length=15, blank=True, null=True)  # Field name made lowercase.
+    category = models.ForeignKey(Discounts, models.DO_NOTHING, db_column='Category', blank=True, null=True)  # Field name made lowercase.
+    payerid = models.ForeignKey(BookingDetails, models.DO_NOTHING, db_column='PayerID', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -238,8 +240,8 @@ class Passenger(models.Model):
 
 class Route(models.Model):
     r_id = models.IntegerField(db_column='R_ID', primary_key=True)  # Field name made lowercase.
-    source_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Source_Airport', blank=True, null=True, related_name='src')  # Field name made lowercase.
-    destination_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Destination_Airport', blank=True, null=True,related_name='dest')  # Field name made lowercase.
+    source_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Source_Airport', blank=True, null=True,related_name="src")  # Field name made lowercase.
+    destination_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Destination_Airport', blank=True, null=True, related_name="dest")  # Field name made lowercase.
     intermediate_stops = models.IntegerField(db_column='Intermediate_Stops', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
