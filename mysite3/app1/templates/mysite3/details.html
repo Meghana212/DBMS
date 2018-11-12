@@ -26,6 +26,13 @@
        			margin-left: 60px; 
 				}
 		</style>
+		<style type="text/css">
+			div.ex { 
+				padding-left: 350px;
+				justify-content: center;
+
+				}
+		</style>
 		<!--
 		CSS
 		============================================= -->
@@ -71,14 +78,15 @@
 										</div>
 									</div>
 								</section>
-
-							<section>
 								<br>
 								<br>
 								<div align="align-items-center" >
-									<form action = "./../forms/">
-										{% for a1 in avf %}
-										<br>
+									<form action="./../details_sub/" method="POST">
+										{% csrf_token %}
+										<div class=ex><h5>Flight number&emsp;&emsp;&emsp;&emsp;Class&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Departure&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Fare&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Available seats</h5>
+										</div>
+										<hr width=40%>
+										
 <!--										<div class="primary-radio">
 											<a name href="./../forms/" class="genric-btn primary circle arrow">Class: {{ a1.0 }}<span class="tab">Rs: {{ a1.1 }}<span class="tab">Departure: {{ a1.2 }}<span class="lnr lnr-arrow-right"></span></a>
 										</div>
@@ -89,23 +97,27 @@
 										<input type="checkbox" id="primary-radio" checked="">
 										<label for="primary-radio"></label>
 										</div>
-										-->
+										class="btn-group btn-group-toggle" data-toggle="buttons"
+									-->
 										<span class="tab1"></span>
 										<center>
-										<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  											<label class="btn btn-secondary"><input formaction="./../forms/"type="radio" name="options" id="option1" autocomplete="off" checked>Class : {{ a1.0 }}<span class="tab1"></span>Departure : {{ a1.2 }}<span class="tab1"></span>Rs. {{ a1.1 }}</label>
+										{% for a1 in avf %}
+										<div>
+											<input type="radio" name="a1" id="a1{{ forloop.counter }}" value="{{ a1 }}">{{ a1.0 }}&emsp;<span class="tab1"></span>{{ a1.1 }}&emsp;<span class="tab1"></span>{{ a1.3 }}&emsp;<span class="tab1"></span>Rs. {{ a1.2 }}&emsp;<span class="tab1"></span>{{ a1.4 }}&emsp;<span class="tab1"></span>                                
 										</div> 
-										</div>
-										</div>
-
+										<br>
 										<br>
 										{% endfor %}
+										<button href="./../payerdetails/">Next</button>
 										<br>
-										<a align href="./../forms/" type="button" class="btn btn-secondary">Submit</a>
+										<br>
+
 									</form>
-								</center>							
-								</div>
-							</section>
+										
+										
+								</center>
+							</div>
+								
 
 <br>
 <br>
