@@ -18,7 +18,8 @@ aid=17
 i=1
 import datetime
 # Create your views here.
-
+def demo(request):
+    return render(request,'mysite3/demo.html')
 def index(request):
     if request.method=='GET':
         data = Airport.objects.all()
@@ -122,12 +123,14 @@ def payerdetails(request):
         b1 = BookingDetails(firstname=fname,middlename=mname,lastname=lname,phone_no=ph_no,bookingdate=Bookingdate,num_of_seats=NOP,fareid=FareID,flight=FlightID,class_field=class_s)
         b1.save()
         c.execute("SELECT PayerID from booking_details where Phone_no=%s",[ph_no])
-        res = c.fetchone()
-        PayerID = res[0]
-        request.session['payerid'] = PayerID
+        res = c.fetchall()
+        PayerID = res[-1]
+        PayerID = PayerID[0]
+        request.session['payerid'] = str(PayerID)
         n = request.session['n']
         n=int(n)
         n=n+1
+        #return render(request,'mysite3/demo.html',{'pn':PayerID})
         return render(request,'mysite3/forms.html',{'i':i,'n':n})
     return render(request,'mysite3/forms.html')
 
@@ -144,7 +147,7 @@ def forms(request):
             fname = request.POST.get('first_name')
             mname = request.POST.get('middle_name')
             lname = request.POST.get('last_name')
-            em = request.POST.get('EMAIL')
+            #em = request.POST.get('EMAIL')
             nationality = request.POST.get('nat')
             age = request.POST.get('Age')
             age = int(age)
@@ -153,7 +156,6 @@ def forms(request):
             fname = str(fname)
             mname = str(mname)
             lname = str(lname)
-            em = str(em)
             nationality = str(nationality)
             category = request.POST.get('category')
             category = int(category)
@@ -162,7 +164,7 @@ def forms(request):
             payerid = request.session['payerid']
             Payerid=int(payerid)
             PID=BookingDetails.objects.get(payerid=Payerid)
-            p1 = Passenger(firstname=fname,middlename=mname,lastname=lname,email=em,nationality=nationality,age=age,phone_no=ph_no,payerid=PID,category=cat)
+            p1 = Passenger(firstname=fname,middlename=mname,lastname=lname,nationality=nationality,age=age,phone_no=ph_no,payerid=PID,category=cat)
             p1.save()
             return render(request,'mysite3/forms.html',{'i':i,'n':m})
         else:
@@ -247,6 +249,8 @@ def lastpage(request):
      f_id = str(f_id)
      c.execute("select Departure,Arrival from flight_schedule where fs_id = %s",[f_id])
      time = c.fetchone()
+     global i
+     i = 1
      return render(request,'mysite3/lastpage.html',{'depart':depart,'a_n':a_n,'fro':fro,'to':to,'class_s':class_s,'pas':pas,'time':time})
 
 def admin(request):
