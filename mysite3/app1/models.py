@@ -135,6 +135,7 @@ class BookingDetails(models.Model):
     fareid = models.ForeignKey('Fare', models.DO_NOTHING, db_column='FareID', blank=True, null=True)  # Field name made lowercase.
     num_of_seats = models.IntegerField(db_column='Num_of_Seats', blank=True, null=True)  # Field name made lowercase.
     totalcost = models.IntegerField(db_column='TotalCost', blank=True, null=True)  # Field name made lowercase.
+    class_field = models.CharField(db_column='Class', max_length=10, blank=True, null=True)  # Field name made lowercase. Field renamed because it was a Python reserved word.
 
     class Meta:
         managed = False
@@ -144,6 +145,7 @@ class BookingDetails(models.Model):
 class Discounts(models.Model):
     category = models.IntegerField(db_column='Category', primary_key=True)  # Field name made lowercase.
     discount = models.IntegerField(db_column='Discount', blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=25, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -227,7 +229,6 @@ class Passenger(models.Model):
     middlename = models.CharField(db_column='MiddleName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     lastname = models.CharField(db_column='LastName', max_length=15, blank=True, null=True)  # Field name made lowercase.
     age = models.IntegerField(db_column='Age', blank=True, null=True)  # Field name made lowercase.
-    email = models.CharField(db_column='Email', max_length=15, blank=True, null=True)  # Field name made lowercase.
     phone_no = models.CharField(db_column='Phone_no', max_length=15, blank=True, null=True)  # Field name made lowercase.
     nationality = models.CharField(db_column='Nationality', max_length=15, blank=True, null=True)  # Field name made lowercase.
     category = models.ForeignKey(Discounts, models.DO_NOTHING, db_column='Category', blank=True, null=True)  # Field name made lowercase.
@@ -240,8 +241,8 @@ class Passenger(models.Model):
 
 class Route(models.Model):
     r_id = models.IntegerField(db_column='R_ID', primary_key=True)  # Field name made lowercase.
-    source_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Source_Airport', blank=True, null=True,related_name="src")  # Field name made lowercase.
-    destination_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Destination_Airport', blank=True, null=True, related_name="dest")  # Field name made lowercase.
+    source_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Source_Airport', blank=True, null=True, related_name='src')  # Field name made lowercase.
+    destination_airport = models.ForeignKey(Airport, models.DO_NOTHING, db_column='Destination_Airport', blank=True, null=True, related_name='dest')  # Field name made lowercase.
     intermediate_stops = models.IntegerField(db_column='Intermediate_Stops', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

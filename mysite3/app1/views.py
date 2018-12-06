@@ -125,8 +125,8 @@ def payerdetails(request):
         c.execute("SELECT PayerID from booking_details where Phone_no=%s",[ph_no])
         res = c.fetchall()
         PayerID = res[-1]
-        PayerID = PayerID[0]
-        request.session['payerid'] = str(PayerID)
+        PayerID = str(PayerID[0])
+        request.session['payerid'] = PayerID
         n = request.session['n']
         n=int(n)
         n=n+1
@@ -191,9 +191,8 @@ def finalpage(request):
     discounts = ()
     for i in range(0,num):
         p = passengers[i]
-        a = str(p)
         p_id=list(p_id)
-        p_id.append(int(a[1:3]))
+        p_id.append(int(p[0]))
         c.execute("select f.Fare-f.Fare*d.Discount/100 'Fare' from discounts d,booking_details b,passenger p,fare f where p.Category = d.Category and p.PayerID=b.PayerID and f.FareID=b.FareID and P_ID=%s",[p_id[i]])
         fare = c.fetchone()
         a = fare[0]
@@ -263,6 +262,7 @@ def admin(request):
             return render(request,'mysite3/admin.html')
     else:
         return render(request,'mysite3/admin.html')
+        
 def editAirport(request):
     if request.method=='GET':
         return render(request,'mysite3/airport.html')
@@ -274,6 +274,7 @@ def editAirport(request):
         a1.save()
         aid = aid+1
         return render(request,'mysite3/edit.html')
+
 def editAircraft(request):
     if request.method=='GET':
         return render(request,'mysite3/aircraft.html')

@@ -9,6 +9,11 @@ urlpatterns = [
     #url(r'^details_sub/', views.details, name='details'),
     url(r'^payerdetails/', views.payerdetails, name='payerdetails'),
     url(r'^details_sub/', views.details, name='details'),
-    #url(r'^finalpage/', views.finalpage, name='finalpage'),
-    url(r'^forms/', views.forms, name='forms')
+    url(r'^finalpage/', views.finalpage, name='finalpage'),
+    url(r'^forms/', views.forms, name='forms'),
+    url(r'^lastpage/', views.lastpage, name='lastpage'),
+    url(r'^admin1/', views.admin ,name='admin'),
+    url(r'^airport/', views.editAirport ,name='editA'),
+    url(r'^aircraft/', views.editAircraft ,name='editAc'),
+    #url(r'^demo/', views.demo ,name='demo')
     ]
