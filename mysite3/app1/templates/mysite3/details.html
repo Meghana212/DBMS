@@ -54,7 +54,7 @@
 								<div class="container">
 									<div class="row align-items-center justify-content-between d-flex">
 										<div id="logo">
-											<a href="index.html">Jet Airlines</a>
+											<a href="index.html"><h4 class="text-white ">Peregrine Airlines</h4></a>
 										</div>
 										<nav id="nav-menu-container">
 											<ul class="nav-menu">
@@ -78,37 +78,43 @@
 										</div>
 									</div>
 								</section>
-								<br>
-								<br>
 								<div align="align-items-center" >
 									<form action="./../details_sub/" method="POST">
 										{% csrf_token %}
-										<div class=ex><h5>Flight number&emsp;&emsp;&emsp;&emsp;Class&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Departure&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Fare&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Available seats</h5>
-										</div>
-										<hr width=40%>
-										
-<!--										<div class="primary-radio">
-											<a name href="./../forms/" class="genric-btn primary circle arrow">Class: {{ a1.0 }}<span class="tab">Rs: {{ a1.1 }}<span class="tab">Departure: {{ a1.2 }}<span class="lnr lnr-arrow-right"></span></a>
-										</div>
-										<br>
-
-										<p>{{ a1.0 }}<span class="tab"></span>{{ a1.1 }}<span class="tab"></span>{{ a1.2 }}</p>
-										<div class="primary-radio">
-										<input type="checkbox" id="primary-radio" checked="">
-										<label for="primary-radio"></label>
-										</div>
-										class="btn-group btn-group-toggle" data-toggle="buttons"
-									-->
-										<span class="tab1"></span>
 										<center>
+											<br>
+										<table>
+											<tr>
+												<th>Flight number&emsp;&emsp;&emsp;</th>
+												<th>Class&emsp;&emsp;&emsp;&emsp;</th>
+												<th>Departure&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+												<th>Fare&emsp;</th>
+												<th>&emsp;Available seats</th>
+											</tr>
+											<tr>
+													<td><hr width=430%></td>
+											</tr>
+											
+										<br>
 										{% for a1 in avf %}
-										<div>
-											<input type="radio" name="a1" id="a1{{ forloop.counter }}" value="{{ a1 }}">{{ a1.0 }}&emsp;<span class="tab1"></span>{{ a1.1 }}&emsp;<span class="tab1"></span>{{ a1.3 }}&emsp;<span class="tab1"></span>Rs. {{ a1.2 }}&emsp;<span class="tab1"></span>{{ a1.4 }}&emsp;<span class="tab1"></span>                                
-										</div> 
-										<br>
-										<br>
+										
+										<tr>
+											<td>&emsp;&emsp;{{ a1.0 }}</td>
+											<td>{{ a1.1 }}</td>      
+											<td>{{ a1.3 }}</td>   
+											<td>Rs. {{ a1.2 }}</td>
+											<td>&emsp;&emsp;&emsp;&emsp;{{ a1.4 }}&emsp;</td>
+											<td><input type="radio" name="a1" id="a1{{ forloop.counter }}" value="{{ a1 }}"></td> 
+											                   
+										</tr>
+										<tr>
+												<td><br></td>
+											</tr>
 										{% endfor %}
-										<button href="./../payerdetails/">Next</button>
+									</table>
+									<br>
+									<br>
+										<button href="./../payerdetails/" class="genric-btn success circle arrow">Next<span class="lnr lnr-arrow-right"></span></button>
 										<br>
 										<br>
 

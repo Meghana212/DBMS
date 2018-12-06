@@ -139,6 +139,7 @@ img {vertical-align: middle;}
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css"/>			
 		<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" type="text/css"/>
         <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css"/>
+        
 	</head>
 
 	<body>
@@ -147,7 +148,7 @@ img {vertical-align: middle;}
 								<div class="container">
 									<div class="row align-items-center justify-content-between d-flex">
 										<div id="logo">
-											<a href="index.html">Jet Airlines</a>
+											<a href="index.html"><h4 class="text-white ">Peregrine Airlines</h4></a>
 										</div>
 										<nav id="nav-menu-container">
 											<ul class="nav-menu">
@@ -177,32 +178,51 @@ img {vertical-align: middle;}
           <br>
           
             <div class="col-lg-8 col-md-8">
-                    <form action="./../forms/" method="POST" nonvalidate>
+                    <!--
+                   <div class="slideshow-container">
+                    
+                    <div class="mySlides">-->
+                    {% if i is n %}
+                        <br>
+                        <br>
+                        <br>
+                        <h4>Succesfully submitted!</h4>
+                        <br>
+                        <br>
+                        <br>
+                        <a href="./../finalpage/" class="genric-btn success circle arrow">Next<span class="lnr lnr-arrow-right"></span></a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+                            
+                    {% else %}
+                        <form action="./../forms/" method="POST" nonvalidate >
                         {% csrf_token %}
-                        {% for i in NOP %}
-                        <div class="slideshow-container">
-                                <div class="mySlides">
-                        <div class="numbertext">{{ i }} / {{ n }}</div>
+                        <h4>For passenger {{ i }}</h4>
                         <br>
                         <div class="mt-10">
-                            <input type="text" name="first_name" placeholder="First Name *" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
+                            <input type="text" name="first_name" placeholder="First Name *" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input" style="width:600px;">
                         </div>
                         <div class="mt-10">
-                            <input type="text" name="middle_name" placeholder="Middle name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input">
+                            <input type="text" name="middle_name" placeholder="Middle name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input" style="width:600px;">
                         </div>
                         <div class="mt-10">
-                            <input type="text" name="last_name" placeholder="Last Name *" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input">
+                            <input type="text" name="last_name" placeholder="Last Name *" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input" style="width:600px;">
                         </div>
-                        <div class="mt-10">
+                        <!--<div class="mt-10">
                             <input type="email" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required class="single-input">
+                        </div>-->
+                        <div class="mt-10">
+                                <input type="number" name="Age" placeholder="Age" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Age'" required class="single-input" style="width:600px;">
                         </div>
                         <div class="mt-10">
-                                <input type="number" name="Age" placeholder="Age" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Age'" required class="single-input">
+                                 <input type="text" name="Phone_no." pattern="[1-9]{1}[0-9]{9}" placeholder="Phone_no." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone_no.'" required class="single-input" style="width:600px;">
                         </div>
-                        <div class="mt-10">
-                                 <input type="text" name="Phone_no." placeholder="Phone_no." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone_no.'" required class="single-input">
-                        </div>
-                        <div class="mt-10">
+                        <div class="mt-10" style="width:600px;">
                             <div class="form-select" id="default-select" name="Nationality">
                                 <select name="nat">
                                     <option selected="selected">Nationality</option>
@@ -213,7 +233,7 @@ img {vertical-align: middle;}
                                 </select>
                         </div>
                         </div>
-                        <div class="mt-10">
+                        <div class="mt-10" style="width:600px;">
                                 <div class="form-select" id="default-select">
                                     <select name="category">
                                         <option selected="selected">Category</option>
@@ -225,14 +245,17 @@ img {vertical-align: middle;}
                                     </select>
                             </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                            <br>
+                            
+                            <button type="submit" class="genric-btn success circle arrow">Submit</button>
+                        </form>
+                       
+               
+                    <!--<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>-->
                     
-                    </div>
-                    
+                    {% endif %}
+                
                     <br>
                     <!--{% for i in NOP %}
                     <div style="text-align:center">
@@ -241,17 +264,15 @@ img {vertical-align: middle;}
                       <span class="dot" onclick="currentSlide(3)"></span>  
                     </div>
                     {% endfor %}-->
-                        <button align href="./../forms/" type="submit" class="btn btn-secondary">Submit</button>
-                    </form>
-                    <br>
-                    <br>
+                      
                     
-                    <a href="./../finalpage/" class="btn btn-secondary">Next</a>
-          
+                    <br>
+                   
        <br>
         <br>
         <br>
                 </div>
+            </div>
             </section>
         <br>
 
@@ -305,6 +326,12 @@ img {vertical-align: middle;}
                                                   slides[slideIndex-1].style.display = "block";  
                                                   dots[slideIndex-1].className += " active";
                                                 }
+                                                </script>
+                                                <script>
+                                                        submitForms = function(){
+                                                        var i = 1;
+                                                        document.getElementById(i).submit();
+                                                        i = i+1;
                                                 </script>
                                         
                                             
