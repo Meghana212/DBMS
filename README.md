@@ -1,4 +1,7 @@
-﻿# DBMS - Airline Booking System
+﻿# DBMS - Airline Ticket Booking System
+In this project we have created a web-based application with Django as backend framework and MariadDB as the database and HTML as the user interface. The application is meant for two kinds of users, admins and customers. The admin can enter data into some tables of the database and the customer can filter the flight option according to his/her need. After booking, the necessary updates are made, and the booked ticket is shown and this webpage can be downloaded.
+
+How to run the project :
 
 1) Install Mariadb.
 2) Install Mysqlclient.
